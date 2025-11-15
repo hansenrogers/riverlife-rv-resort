@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-serif: 'Old Standard TT', serif;
+  --font-sans: 'Karla', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-3 bg-accent text-gray-900 font-semibold rounded-full 
+           hover:bg-opacity-90 transition-all duration-300 
+           inline-flex items-center justify-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-3 border-2 border-white text-white font-semibold rounded-full 
+           hover:bg-white hover:text-gray-900 transition-all duration-300 
+           inline-flex items-center justify-center gap-2;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24 px-6 md:px-12;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .heading-xl {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+  
+  .heading-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+  
+  .heading-md {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight;
+  }
+  
+  .card {
+    @apply bg-gray-800 rounded-lg shadow-lg overflow-hidden;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg 
+           text-white placeholder-gray-400 focus:outline-none focus:ring-2 
+           focus:ring-accent focus:border-transparent transition-all;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfe4f2;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9cd4e8;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, #1f2937 4%, #374151 25%, #1f2937 36%);
+  background-size: 1000px 100%;
+}

@@ -1,0 +1,55 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == 'k7RB8ZiuYKbO9JV3mEKCIRv0Pij2';
+    }
+    
+    // Sites Collection - Public read, admin-only write
+    match /sites/{siteId} {
+      allow read: if true; // Anyone can view sites
+      allow write: if isAdmin(); // Only admin can modify
+    }
+    
+    // Bookings Collection - Guests can create, admins can read/update
+    match /bookings/{bookingId} {
+      allow read: if isAdmin(); // Only admin can view all bookings
+      allow create: if true; // Allow guests to create bookings
+      allow update: if isAdmin(); // Only admin can update bookings
+      allow delete: if isAdmin(); // Only admin can delete
+    }
+    
+    // Pricing Rules - Public read, admin-only write
+    match /pricingRules/{ruleId} {
+      allow read: if true; // Anyone can read pricing rules
+      allow write: if isAdmin(); // Only admin can modify
+    }
+    
+    // Coupons - Public read (for validation), admin-only write
+    match /coupons/{couponId} {
+      allow read: if true; // Anyone can validate coupons
+      allow write: if isAdmin(); // Only admin can manage coupons
+    }
+    
+    // Settings - Public read, admin-only write
+    match /settings/{settingId} {
+      allow read: if true; // Anyone can read settings (tax rate, policies, etc.)
+      allow write: if isAdmin(); // Only admin can modify
+    }
+    
+    // Contact Messages - Anyone can create, admin-only read
+    match /contactMessages/{messageId} {
+      allow read: if isAdmin(); // Only admin can read messages
+      allow create: if true; // Anyone can send contact messages
+      allow update, delete: if false; // Cannot modify or delete messages
+    }
+    
+    // Users/Admin Collection - Admin-only access
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
