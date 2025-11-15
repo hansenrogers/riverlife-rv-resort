@@ -29,7 +29,7 @@ export interface Booking {
   checkOut: Date;
   numberOfNights: number;
   numberOfGuests: number;
-  rvDetails: RVDetails;
+  rvDetails?: RVDetails;
   pricing: BookingPricing;
   status: 'pending' | 'approved' | 'rejected' | 'confirmed' | 'cancelled' | 'completed';
   paymentStatus: 'pending' | 'deposit_paid' | 'fully_paid' | 'refunded';

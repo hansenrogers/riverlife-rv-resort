@@ -11,7 +11,7 @@ import {
   User, Mail, Phone, Calendar, Users, Car, Info, 
   CreditCard, AlertCircle, CheckCircle, ChevronLeft, Loader2
 } from 'lucide-react';
-import { RVSite } from '@/types';
+import { RVSite, RVDetails } from '@/types';
 import { getSiteById, calculateBookingPrice, createBooking, checkSiteAvailability } from '@/lib/firebase/firestore';
 import { loadStripe } from '@stripe/stripe-js';
 
